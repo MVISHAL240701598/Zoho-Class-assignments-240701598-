@@ -1,0 +1,617 @@
+/*
+ * Author       : vishal.m.2024.cse_rajalak
+ * Generated on : 24-Jul-2026 16:03:11
+ * Version      : 1.0
+ */
+ application "Patient appointment booking system"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Patient_Appointment_booking_form
+		{
+			displayname = "Patient Appointment booking form"
+			success message = "Thanks for filling the form :)"
+			feature property = 72
+			Section_A
+			(
+				type = section
+				displayname = "Section A -Patient Details"
+				visibility = true
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Patient_Name
+			(
+    			type = name
+				displayname = "Patient Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Age
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Gender
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Male","Female"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Section_B
+			(
+				type = section
+				displayname = "Section B- Contact Details"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Email_Address
+			(
+    			type = email
+				displayname = "Email Address"
+				maxchar = 80
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Residential_Address
+			(
+    			type = address
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "longitude"
+	     			 visibility = false
+     			) 
+	 			row = 2
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Section_C
+			(
+				type = section
+				displayname = "Section C -Medical Details"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Referred_By
+			(
+    			type = text
+				displayname = "Referred By"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			must have Department
+			(
+				type = picklist
+				maxchar = 100
+				values = {"General Medicine","Ent","Skin"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Existing_Conditions
+			(
+				type = list	
+				displayname = "Existing Conditions"
+				values = {"Choice 1","Choice 2","Choice 3"}
+				height = 60px
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Symptoms_Description
+			(
+    			type = textarea
+				displayname = "Symptoms Description"
+				height = 100px
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Section_D
+			(
+				type = section
+				displayname = "Section D- Scheduling & Consent"
+				visibility = true
+	 			row = 4
+	 			column = 0   
+				width = medium
+			)
+			must have Preferred_Appointment_Date
+			(
+    			type = date
+				displayname = "Preferred Appointment Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Preferred_Appointment_Time
+			(
+    			type = time
+				displayname = "Preferred Appointment Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			must have Consent_For_Treatment
+			(
+				type = checkboxes	
+				displayname = "Consent For Treatment"
+				values = {"Agreed"}
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Section
+			(
+				type = section
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list Patient_Appointment_booking_form_Report
+		{
+			displayName = "Patient Appointment booking form Report"
+			show all rows from Patient_Appointment_booking_form    
+			(
+				Patient_Name  as "Patient Name"
+				Email_Address as "Email Address"
+				Residential_Address 
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				Contact_Number as "Contact Number"
+				(
+					displayformat = plainnumber 
+				)
+				Referred_By as "Referred By"
+				Symptoms_Description as "Symptoms Description"
+				Age
+				Preferred_Appointment_Date as "Preferred Appointment Date"
+				Preferred_Appointment_Time as "Preferred Appointment Time"
+				Department
+				Gender
+				Existing_Conditions as "Existing Conditions"
+				Consent_For_Treatment as "Consent For Treatment"
+			)
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Send_Email_Form_Propertie as "Send Email - Form Properties"
+			{
+				type =  presuccess
+				form = Patient_Appointment_booking_form
+				on start
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "zoho.adminuserid"
+							subject : "Patient appointment booking system : New entry added"
+							message : "Hello,<br/><br/>A new entry added in 'Patient Appointment booking form' form of 'Patient appointment booking system' application.<br/>"
+							attachments : template : _default as inline
+						)
+					}
+				}
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form Patient_Appointment_booking_form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report Patient_Appointment_booking_form_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Patient_Name as "Patient Name"
+								Email_Address as "Email Address"
+								Residential_Address
+								Contact_Number as "Contact Number"
+								Referred_By as "Referred By"
+								Symptoms_Description as "Symptoms Description"
+								Age
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Patient_Name as "Patient Name"
+								Email_Address as "Email Address"
+								Residential_Address
+								Contact_Number as "Contact Number"
+								Referred_By as "Referred By"
+								Symptoms_Description as "Symptoms Description"
+								Age
+								Preferred_Appointment_Date as "Preferred Appointment Date"
+								Preferred_Appointment_Time as "Preferred Appointment Time"
+								Department
+								Gender
+								Existing_Conditions as "Existing Conditions"
+								Consent_For_Treatment as "Consent For Treatment"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Patient_Appointment_booking_form
+				{
+					displayname = "Patient Appointment booking form"
+					icon = "location-appointment"
+					form  Patient_Appointment_booking_form
+					{
+						icon = "location-appointment"
+					}
+					report Patient_Appointment_booking_form_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Patient_Appointment_booking_form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = chryslerpurple
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Patient_Appointment_booking_form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = yellow
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
